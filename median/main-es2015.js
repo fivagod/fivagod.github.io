@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h4>Divide and conquer in Median's world (<a href=\"https://en.wikipedia.org/wiki/Median_of_medians\">Median of medians</a>, calculate big data without sorting)</h4>\nIt's an algorithm, converted from pseudocode (Wiki) to typescript, but i think it works wrong and give very approximate value");
+/* harmony default export */ __webpack_exports__["default"] = ("<h4>Divide and conquer in Median's world (<a href=\"https://brilliant.org/wiki/median-finding-algorithm/\">Median of medians</a>, calculate big data without sorting)</h4>\nThis algorithm based on quick search of Kth element in array. <br />\nNow implemented just a case when array has odd length. <br />\nFor an even lenght we have 2 way:\n<ol>\n<li>dummy way - is find 2 values - length/2 and length/2 - 1, like we do it in simple algorithm. But we should make 2 different searches</li>\n<li>smart way - is always finding closest neihbours for out pivot.</li>\n</ol>\nPossible, in future, i'll implement second way.<br />\nBTW, checking different data, i've found that array.sort (which we use for simple methods) works wrong for arrays with length > 1 milion. i don't know why. But this method (median of medians) has the advantage only when array.length is over 1 million :)");
 
 /***/ }),
 
@@ -71,7 +71,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h4>Dummy trick, if you've confused with array.length calculation. But very sloooow, don't do it in real life</h4>\n<ngx-prism language=\"javascript\">\n    <pre>\n      let array = [1, 23, 14, 432, 34];\n      let arrayCopy = [...array]\n      arrayCopy.sort()\n      while(arrayCopy.length > 2) {{'{'}}\n        arrayCopy.shift()\n        arrayCopy.pop()\n      }\n      let median = (arrayCopy[0] + (arrayCopy[1] || 0)) / arrayCopy.length\n    </pre>\n  </ngx-prism>\n  ");
+/* harmony default export */ __webpack_exports__["default"] = ("<h4>Dummy trick, if you've confused with array.length calculation. But very sloooow, don't do it in real life</h4>\n<ngx-prism language=\"javascript\">\n    <pre>\n      let array = [1, 23, 14, 432, 34];\n      let arrayCopy = [...array]\n      arrayCopy.sort((a, b) => a - b)\n      while(arrayCopy.length > 2) {{'{'}}\n        arrayCopy.shift()\n        arrayCopy.pop()\n      }\n      let median = (arrayCopy[0] + (arrayCopy[1] || 0)) / arrayCopy.length\n    </pre>\n  </ngx-prism>\n  ");
 
 /***/ }),
 
@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h4>This is simple median calculation</h4>\n<ngx-prism language=\"javascript\">\n  <pre>\n    let array = [1, 23, 14, 432, 34];\n    array.sort();\n    let median = array.length % 2 === 0 \n      ? (array[array.length/2 - 1] + array[array.length/2]) / 2  \n      : array[Math.floor(array.length/2)]\n  </pre>\n</ngx-prism>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h4>This is simple median calculation</h4>\n<ngx-prism language=\"javascript\">\n  <pre>\n    let array = [1, 23, 14, 432, 34];\n    array.sort((a, b) => a - b);\n    let median = array.length % 2 === 0 \n      ? (array[array.length/2 - 1] + array[array.length/2]) / 2  \n      : array[Math.floor(array.length/2)]\n  </pre>\n</ngx-prism>\n");
 
 /***/ }),
 
@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h4>Also we can calculate median by splice (it modifies source array, so you should copy it, if want save)</h4>\n<ngx-prism language=\"javascript\">\n  <pre>\n    let array = [...[1, 23, 14, 432, 34]]\n    array.sort()\n    let splice = array.splice(Math.ceil(array.length/2) - 1, 2 - (array.length % 2))\n    let median = (splice[0] + (splice[1] || 0)) / splice.length\n  </pre>\n</ngx-prism>\n  \n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h4>Also we can calculate median by splice (it modifies source array, so you should copy it, if want save)</h4>\n<ngx-prism language=\"javascript\">\n  <pre>\n    let array = [...[1, 23, 14, 432, 34]]\n    array.sort((a, b) => a - b)\n    let splice = array.splice(Math.ceil(array.length/2) - 1, 2 - (array.length % 2))\n    let median = (splice[0] + (splice[1] || 0)) / splice.length\n  </pre>\n</ngx-prism>\n  \n");
 
 /***/ }),
 
@@ -576,11 +576,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
-/* harmony import */ var _shared_utils_medianOfMedians__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shared/utils/medianOfMedians */ "./src/app/shared/utils/medianOfMedians.ts");
+/* harmony import */ var _shared_utils_medianOfMedians2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shared/utils/medianOfMedians2 */ "./src/app/shared/utils/medianOfMedians2.ts");
 
 
 
 
+// import {MedianOfMedians} from './shared/utils/medianOfMedians';
 
 const decoder = new TextDecoder('utf-8');
 let ArrayHandlerService = class ArrayHandlerService {
@@ -588,6 +589,9 @@ let ArrayHandlerService = class ArrayHandlerService {
         this.observers = {};
     }
     processStrategy(strategy) {
+        if (strategy === 'bigdata') {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(Object(_shared_utils_medianOfMedians2__WEBPACK_IMPORTED_MODULE_4__["default"])(this.handle(strategy).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatMap"])(a => (Array.isArray(a)) ? Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(a) : Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(a)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(a => typeof (a === 'string') ? parseInt(a, 10) : a))).then(a => a));
+        }
         const modifiers = this.getModifiers(strategy);
         return modifiers.reduce((ob, op) => ob.pipe(op), this.handle(strategy));
     }
@@ -630,7 +634,7 @@ let ArrayHandlerService = class ArrayHandlerService {
                 // main function
                 Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(arr => {
                     if (Array.isArray(arr)) {
-                        arr.sort();
+                        arr.sort((a, b) => a - b);
                         const median = arr.length % 2 === 0
                             ? (arr[arr.length / 2 - 1] + arr[arr.length / 2]) / 2
                             : arr[Math.floor(arr.length / 2)];
@@ -644,7 +648,7 @@ let ArrayHandlerService = class ArrayHandlerService {
                 // tap(val => console.log(val)),
                 Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(arr => {
                     if (Array.isArray(arr)) {
-                        arr.sort();
+                        arr.sort((a, b) => a - b);
                         const splice = arr.splice(Math.ceil(arr.length / 2) - 1, 2 - (arr.length % 2));
                         const median = (splice[0] + (splice[1] || 0)) / splice.length;
                         return median;
@@ -656,23 +660,13 @@ let ArrayHandlerService = class ArrayHandlerService {
                 // main function
                 Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(arr => {
                     if (Array.isArray(arr)) {
-                        arr.sort();
+                        arr.sort((a, b) => a - b);
                         while (arr.length > 2) {
                             arr.shift();
                             arr.pop();
                         }
                         const median = (arr[0] + (arr[1] || 0)) / arr.length;
                         return median;
-                    }
-                }));
-                break;
-            case 'bigdata':
-                ret.push(
-                // tap(val => console.log(val)),
-                Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(arr => {
-                    if (Array.isArray(arr)) {
-                        const median = new _shared_utils_medianOfMedians__WEBPACK_IMPORTED_MODULE_4__["MedianOfMedians"](arr);
-                        return median.median;
                     }
                 }));
                 break;
@@ -774,112 +768,80 @@ LazyMedianComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/shared/utils/medianOfMedians.ts":
-/*!*************************************************!*\
-  !*** ./src/app/shared/utils/medianOfMedians.ts ***!
-  \*************************************************/
-/*! exports provided: MedianOfMedians */
+/***/ "./src/app/shared/utils/medianOfMedians2.ts":
+/*!**************************************************!*\
+  !*** ./src/app/shared/utils/medianOfMedians2.ts ***!
+  \**************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MedianOfMedians", function() { return MedianOfMedians; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getMedianOfMedians; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+// now works only with arrays which have odd length
+// implemented as recursive function from here
+// https://brilliant.org/wiki/median-finding-algorithm/
+// mixed promises with rx.js, if you can avoid promise - please call me :)
 
-class SwappableArray extends Array {
-    constructor() {
-        super();
-    }
-    swapItems(a, b) {
-        this[a] = this.splice(b, 1, this[a])[0];
-        return this;
-    }
-}
-class MedianOfMedians {
-    constructor(list) {
-        this.list = Object.assign(new SwappableArray(), list);
-        this.median = this.list[this.pivot(0, this.list.length - 1)];
-    }
-    partition5(left, right) {
-        // sort each 5 elements and find it median index
-        let i = left + 1;
-        while (i <= right) {
-            let j = i;
-            while (j > left && this.list[j - 1] > this.list[j]) {
-                this.list.swapItems(j - 1, j);
-                j--;
+
+
+function getMedianOfMedians(sequence$, position) {
+    return new Promise((resolve, reject) => {
+        const left = [];
+        const right = [];
+        const medians = [];
+        const medSubj = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        const medians$ = medSubj.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["skip"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(a => medians.push(a)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["last"])());
+        const sourceObs = sequence$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["bufferCount"])(5), 
+        // tap(a => console.log(a)),
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["flatMap"])(a => {
+            if (Array.isArray(a)) {
+                a.sort();
+                medSubj.next(a[Math.floor(a.length / 2)]);
             }
-            i++;
-        }
-        return Math.floor((left + right) / 2);
-    }
-    pivot(left, right) {
-        // for 5 or less elements just get median
-        if (right - left < 5) {
-            return this.partition5(left, right);
-        }
-        // otherwise move the medians of five-element subgroups to the first n/5 positions
-        for (let i = left; i <= right; i += 5) {
-            // get the median position of the i'th five-element subgroup
-            let subRight = i + 4;
-            if (subRight > right) {
-                subRight = right;
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["from"])(a);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["bufferWhen"])(() => medians$));
+        sourceObs.subscribe(numbers => {
+            // console.log(numbers.length)
+            position = typeof position === 'undefined' ? Math.floor(numbers.length / 2) : position;
+            // console.log(position);
+            if (numbers.length <= 5) {
+                numbers.sort((a, b) => a - b);
+                resolve(numbers[position]);
+                return;
             }
-            const median5 = this.partition5(i, subRight);
-            this.list.swapItems(median5, left + Math.floor((i - left) / 5));
-        }
-        // compute the median of the n/5 medians-of-five
-        const mid = (right - left) / 10 + left + 1;
-        return this.select(left, left + Math.floor((right - left) / 5), mid);
-    }
-    select(left, right, n) {
-        while (1) {
-            if (left >= right) {
-                return left;
+            // can use recursion here too in future
+            medians.sort((a, b) => a - b);
+            const pivot = medians[Math.floor(medians.length / 2)];
+            let bPivotSelf = false;
+            for (const num of numbers) {
+                if (num < pivot || (bPivotSelf && num === pivot)) {
+                    left.push(num);
+                }
+                else if (num > pivot) {
+                    right.push(num);
+                }
+                else {
+                    // if we don't have distinct values - we should skip just first pivot
+                    bPivotSelf = true;
+                }
             }
-            let pivotIndex = this.pivot(left, right);
-            pivotIndex = this.partition(left, right, pivotIndex, n);
-            if (n === pivotIndex) {
-                return n;
+            const k = left.length;
+            // console.log(pivot, left, right);
+            if (position < k) {
+                getMedianOfMedians(Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["from"])(left), position).then(result => resolve(result));
             }
-            else if (n < pivotIndex) {
-                right = pivotIndex - 1;
+            else if (position > k) {
+                getMedianOfMedians(Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["from"])(right), position - k - 1).then(result => resolve(result));
             }
             else {
-                left = pivotIndex + 1;
+                resolve(pivot);
             }
-        }
-    }
-    partition(left, right, pivotIndex, n) {
-        const pivotValue = this.list[pivotIndex];
-        this.list.swapItems(pivotIndex, right); // Move pivot to end
-        let storeIndex = left;
-        // Move all elements smaller than the pivot to the left of the pivot
-        for (let i = left; i < right; i++) {
-            if (this.list[i] < pivotValue) {
-                this.list.swapItems(storeIndex, i);
-                storeIndex++;
-            }
-        }
-        // Move all elements equal to the pivot right after
-        // the smaller elements
-        let storeIndexEq = storeIndex;
-        for (let i = storeIndex; i < right - 1; i++) {
-            if (this.list[i] === pivotValue) {
-                this.list.swapItems(storeIndexEq, i);
-                storeIndexEq++;
-            }
-        }
-        this.list.swapItems(right, storeIndexEq); // Move pivot to its final place
-        // Return location of pivot considering the desired location n
-        if (n < storeIndex) {
-            return storeIndex; // n is in the group of smaller elements
-        }
-        if (n <= storeIndexEq) {
-            return n; // n is in the group equal to pivot
-        }
-        return storeIndexEq; // n is in the group of larger elements
-    }
+        });
+    });
 }
 
 
